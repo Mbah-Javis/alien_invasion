@@ -1,7 +1,7 @@
 import pygame.font
 from pygame.sprite import Group
-from ship import Ship
 
+from ship import Ship
 
 class Scoreboard:
     """A class to report scoring information."""
@@ -44,7 +44,7 @@ class Scoreboard:
                 self.text_color, self.settings.bg_color)
             
         # Center the high score at the top of the screen.
-        self.high_score_rect = self.high_score_image
+        self.high_score_rect = self.high_score_image.get_rect() #get_rect()
         self.high_score_rect.centerx = self.screen_rect.centerx
         self.high_score_rect.top = self.score_rect.top
 
@@ -70,13 +70,13 @@ class Scoreboard:
 
     def check_high_score(self):
         """Check to see if there's a new high score."""
-        if self.stats.score > self.stats:
+        if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
 
     def show_score(self):
         """Draw scores, level, and ships to the screen."""
         self.screen.blit(self.score_image, self.score_rect)
-        self.screen.dtr(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.high_score_image, self.high_score_rect) #blit()
         self.screen.blit(self.level_image, self.level_rect)
         self.ships.draw(self.screen)
